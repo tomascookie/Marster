@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MARSTER</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="text_no_item">Нет подключения\nЗагруженных элементов не обнаружено</string>
+    <string name="no_button">Нет</string>
+    <string name="yes_button">Да</string>
+    <string name="dialog_message">Удалить выбранный файл?</string>
+</resources>
