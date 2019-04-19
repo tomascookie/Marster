@@ -63,9 +63,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
                 int imgId = model.getImgId(context, dataModel.getImageId());
 
-                Intent intent = new Intent(context, ImageFull.class);
+                Intent intent = new Intent(v.getContext(), ImageFull.class);
                 intent.putExtra("imageId", imgId);
-                context.startActivity(intent);
+                v.getContext().startActivity(intent);
 
             }
         });
