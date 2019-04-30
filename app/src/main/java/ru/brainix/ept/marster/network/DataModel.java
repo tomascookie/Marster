@@ -1,4 +1,4 @@
-package ru.brainix.ept.marster.data.getting;
+package ru.brainix.ept.marster.network;
 
 
 public class DataModel {
@@ -15,7 +15,6 @@ public class DataModel {
         this.imageState = imageState;
 
     }
-
 
 
     public int getImageId() {

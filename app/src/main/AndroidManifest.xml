@@ -8,6 +8,7 @@
 
     <application
         android:allowBackup="true"
+				android:name=".App"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -15,7 +16,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".MainActivity"
+            android:name=".screens.main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="orientation|screenSize|keyboardHidden">
@@ -26,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ImageFull"
+            android:name=".screens.imagefull.ImageFullActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

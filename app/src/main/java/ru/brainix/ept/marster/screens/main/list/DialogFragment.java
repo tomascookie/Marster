@@ -1,17 +1,17 @@
-package ru.brainix.ept.marster.list.setting;
+package ru.brainix.ept.marster.screens.main.list;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-import ru.brainix.ept.marster.MainActivity;
-import ru.brainix.ept.marster.MainModel;
+import ru.brainix.ept.marster.screens.main.MainActivity;
+import ru.brainix.ept.marster.screens.main.MainModel;
 import ru.brainix.ept.marster.R;
 
 public class DialogFragment extends android.support.v4.app.DialogFragment {
 
-    private final String LOG_TAG = "DialogFragment  ";
+    //private final String LOG_TAG = "DialogFragment  ";
 
     //Создаем диалоговое окно
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -29,12 +29,10 @@ public class DialogFragment extends android.support.v4.app.DialogFragment {
                         //Меняем статус отображения картинки на неактивный, кэш оставляем
                         MainModel model = new MainModel();
 
-                        model.delImage(getContext(), imageId);
+                        model.delImage(imageId);
 
                         //Обновляем данные в списке
-                        ((MainActivity) getContext()).startRecycler();
-
-
+											  ((MainActivity)getContext()).refreshList();
 
 
                     }
@@ -42,4 +40,5 @@ public class DialogFragment extends android.support.v4.app.DialogFragment {
                 .setNegativeButton(R.string.no_button, null)
                 .create();
     }
+
 }

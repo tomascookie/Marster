@@ -1,45 +1,57 @@
-package ru.brainix.ept.marster.data.getting;
+package ru.brainix.ept.marster.network;
 
+import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build.VERSION_CODES;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 
-public class ImageDownloader {
+class ImageDownloader {
 
 private final String LOG_TAG = "ImageDownloader ";
 
 
-    //Запускаем поток
-    public byte[] downloadImage(String urlAdress){
+		@TargetApi(VERSION_CODES.KITKAT)
+		public byte[] getImageByte(String urlAdress){
 
-        DownloadImage downloadImage = new DownloadImage();
-        downloadImage.setUrlAdress(urlAdress);
+			URL url = null;
 
-        Thread thread = new Thread(downloadImage);
-        thread.start();
+			try {
+				url = new URL(urlAdress);
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
 
+			ByteArrayOutputStream output = new ByteArrayOutputStream();
+			URLConnection conn = null;
 
-            try { thread.join(); }
+			try {
+				conn = url.openConnection();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 
-            catch (InterruptedException e) { e.printStackTrace(); }
+			conn.setRequestProperty("User-Agent", "Firefox");
 
+			try (InputStream inputStream = conn.getInputStream()) {
+				int n = 0;
+				byte[] buffer = new byte[1024];
+				while (-1 != (n = inputStream.read(buffer))) {
+					output.write(buffer, 0, n);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 
-        //Конвертим битмап в байтовый массив
-        Bitmap finImg = downloadImage.getImage();
-
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        finImg.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-        byte[] img = bos.toByteArray();
-
-
-        return img;
-    }
-
+			return output.toByteArray();
+		}
 
 
     //Класс загрузки через поток
@@ -68,7 +80,8 @@ private final String LOG_TAG = "ImageDownloader ";
 
 
     //Метод загрузки картинки
-    private synchronized Bitmap getUrlImage(String urlAdress){
+    private  Bitmap getUrlImage(String urlAdress){
+
 
         URL url = null;
 

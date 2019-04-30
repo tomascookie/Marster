@@ -1,26 +1,80 @@
-package ru.brainix.ept.marster;
+package ru.brainix.ept.marster.screens.main;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import java.util.List;
 
-import ru.brainix.ept.marster.data.getting.DataModel;
+import ru.brainix.ept.marster.App;
+import ru.brainix.ept.marster.network.DataModel;
 import ru.brainix.ept.marster.database.ImageDbAdapter;
+import ru.brainix.ept.marster.network.DataParser;
 
-public class MainModel {
+public class MainModel implements IMainModel {
 
     private final String LOG_TAG = "MainModel ";
 
+		interface CompleteCallback {
+		void onComplete(List<DataModel> dataModels);
+	}
 
+		@Override
+		public void getMainList(CompleteCallback callback) {
+
+			GetList getList = new GetList(callback);
+			getList.execute();
+
+
+		}
+
+
+		class GetList extends AsyncTask<Void, Void, List<DataModel>> {
+
+			private final CompleteCallback callback;
+
+			GetList(CompleteCallback callback) {
+				this.callback = callback;
+			}
+
+			@Override
+			protected List<DataModel> doInBackground(Void... voids) {
+
+				DataParser dataParser = new DataParser();
+
+				List<DataModel> newList = dataParser.parserThread();
+
+
+				Log.d(LOG_TAG, "List Formed with size " + newList.size());
+
+
+
+				if(newList.size() == 0){ return null; }
+
+
+				return newList;
+			}
+
+			@Override
+			protected void onPostExecute(List<DataModel> dataModels) {
+				super.onPostExecute(dataModels);
+				if (callback != null) {
+					callback.onComplete(dataModels);
+				}
+
+
+			}
+		}
+
+
+
+
+		//TODO: Работа с БД
 
     //Сохраняем изображение со всеми параметрами
-    public void insertImg(Context cntxt, int imageId, byte[] imageByteArray, int imageState){
+    public void insertImg(int imageId, byte[] imageByteArray, int imageState){
 
         ImageDbAdapter adapter;
-        adapter = new ImageDbAdapter(cntxt);
+        adapter = new ImageDbAdapter(App.getContext());
 
         DataModel imageModel = new DataModel( imageId, imageByteArray, imageState);
 
@@ -33,14 +87,13 @@ public class MainModel {
 
     }
 
-
     //Проверяем есть ли картинка с нужным айдишником
-    public int getImgId(Context cntxt, int imageId){
+    public int getImgId(int imageId){
 
         int anser;
 
         ImageDbAdapter adapter;
-        adapter = new ImageDbAdapter(cntxt);
+        adapter = new ImageDbAdapter(App.getContext());
 
         adapter.open();
 
@@ -57,12 +110,12 @@ public class MainModel {
     }
 
     //Получаем статус картинки по айдишнику
-    public int getImgState(Context cntxt, int imageId){
+    public int getImgState(int imageId){
 
         int anser;
 
         ImageDbAdapter adapter;
-        adapter = new ImageDbAdapter(cntxt);
+        adapter = new ImageDbAdapter(App.getContext());
 
         adapter.open();
 
@@ -82,13 +135,13 @@ public class MainModel {
 
 
     //Получаем список всех картинок из БД
-    public List<DataModel> getByCountId(Context cntxt){
+    public List<DataModel> getByCountId(){
 
 
         List<DataModel> ourList;
 
         ImageDbAdapter adapter;
-        adapter = new ImageDbAdapter(cntxt);
+        adapter = new ImageDbAdapter(App.getContext());
 
         adapter.open();
 
@@ -102,11 +155,11 @@ public class MainModel {
 
 
     //Получаем картинку по ее айди
-    public Bitmap getImgBitmap(Context cntxt, int imageId){
+    public byte[] getImgBitmap(int imageId){
 
 
         ImageDbAdapter adapter;
-        adapter = new ImageDbAdapter(cntxt);
+        adapter = new ImageDbAdapter(App.getContext());
 
         adapter.open();
 
@@ -114,24 +167,15 @@ public class MainModel {
 
         adapter.close();
 
-        byte[] bitmapArray = myModel.getImageByteArray();
-
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        options.inSampleSize = 2;
-
-        Bitmap bmp = BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.length);
-
-
-        return bmp;
+			return myModel.getImageByteArray();
     }
 
 
     //Меняем статус изображения на неактивный
-    public void delImage(Context cntxt, int imageId){
+    public void delImage(int imageId){
 
         ImageDbAdapter adapter;
-        adapter = new ImageDbAdapter(cntxt);
+        adapter = new ImageDbAdapter(App.getContext());
 
 
         adapter.open();
@@ -143,10 +187,6 @@ public class MainModel {
         adapter.close();
 
     }
-
-
-
-
 
 
 

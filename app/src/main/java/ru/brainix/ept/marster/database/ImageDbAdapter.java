@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.brainix.ept.marster.data.getting.DataModel;
+import ru.brainix.ept.marster.network.DataModel;
 import ru.brainix.ept.marster.database.ImageBaseContract.ImageParamName;
 
 public class ImageDbAdapter {
