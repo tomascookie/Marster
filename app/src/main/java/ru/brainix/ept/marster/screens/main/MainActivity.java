@@ -13,6 +13,7 @@ import java.util.List;
 import ru.brainix.ept.marster.R;
 import ru.brainix.ept.marster.network.DataModel;
 import ru.brainix.ept.marster.screens.main.list.CardAdapter;
+import ru.brainix.ept.marster.screens.main.list.CardPresenter;
 
 
 public class MainActivity extends AppCompatActivity implements IMainView {
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
 			  RecyclerView recyclerView = findViewById(R.id.mainList);
 
-			  CardAdapter adapter = new CardAdapter(this, list);
+			  CardAdapter adapter = new CardAdapter(new CardPresenter(list));
 				recyclerView.setAdapter(adapter);
 				recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
 

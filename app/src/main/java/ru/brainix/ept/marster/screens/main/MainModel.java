@@ -64,9 +64,9 @@ public class MainModel implements IMainModel {
 		}
 
 
-	interface CompleteCallback {
-		void onComplete(List<DataModel> dataModels);
-	}
+		interface CompleteCallback {
+			void onComplete(List<DataModel> dataModels);
+		}
 
 
 		//TODO: Работа с БД скинуть в отдельный класс

@@ -72,8 +72,6 @@ public class DataParser {
 
              Log.d(LOG_TAG, "!!!Загружаем из веба");
 
-             getApiData();
-
              try { jsonParser();  }
 
              catch (JSONException e) {  e.printStackTrace(); }
@@ -117,6 +115,10 @@ public class DataParser {
 
 			return check.isInternet();
 		}
+
+
+
+
 
 		//TODO:Может отдельный поток
 		private byte[] downloadImage(String imageUrl){
