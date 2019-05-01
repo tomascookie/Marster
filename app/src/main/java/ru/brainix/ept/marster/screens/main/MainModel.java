@@ -14,6 +14,9 @@ public class MainModel implements IMainModel {
 
     private final String LOG_TAG = "MainModel ";
 
+		interface CompleteCallback {
+		void onComplete(List<DataModel> dataModels);
+	}
 
 		@Override
 		public void getMainList(CompleteCallback callback) {
@@ -23,6 +26,7 @@ public class MainModel implements IMainModel {
 
 
 		}
+
 
 		class GetList extends AsyncTask<Void, Void, List<DataModel>> {
 
@@ -62,12 +66,9 @@ public class MainModel implements IMainModel {
 		}
 
 
-		interface CompleteCallback {
-			void onComplete(List<DataModel> dataModels);
-		}
 
 
-		//TODO: Работа с БД скинуть в отдельный класс
+		//TODO: Работа с БД
 
     //Сохраняем изображение со всеми параметрами
     public void insertImg(int imageId, byte[] imageByteArray, int imageState){

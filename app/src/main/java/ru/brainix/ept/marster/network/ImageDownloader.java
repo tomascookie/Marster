@@ -13,7 +13,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class ImageDownloader {
+class ImageDownloader {
 
 private final String LOG_TAG = "ImageDownloader ";
 

@@ -53,11 +53,11 @@ public class DataParser {
         }
 
 
-        public List<DataModel> getDataModelList() {
+        List<DataModel> getDataModelList() {
             return mDataModelList;
         }
 
-    };
+    }
 
 
 

@@ -11,7 +11,7 @@ import ru.brainix.ept.marster.R;
 
 public class DialogFragment extends android.support.v4.app.DialogFragment {
 
-    private final String LOG_TAG = "DialogFragment  ";
+    //private final String LOG_TAG = "DialogFragment  ";
 
     //Создаем диалоговое окно
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -32,9 +32,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment {
                         model.delImage(imageId);
 
                         //Обновляем данные в списке
-                        //((MainActivity) getContext()).startRecycler();
-
-
+											  ((MainActivity)getContext()).refreshList();
 
 
                     }
@@ -42,4 +40,5 @@ public class DialogFragment extends android.support.v4.app.DialogFragment {
                 .setNegativeButton(R.string.no_button, null)
                 .create();
     }
+
 }

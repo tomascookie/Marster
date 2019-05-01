@@ -24,8 +24,9 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
 		private TextView textNoItem;
 		private ProgressBar pBar;
+		private RecyclerView recyclerView;
 
-    @Override
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -37,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
 				mainPresenter = new MainPresenter();
 
+				recyclerView = findViewById(R.id.mainList);
+
+
 				pBar = findViewById(R.id.progressBar);
 
 				textNoItem = findViewById(R.id.textNoItem);
@@ -47,6 +51,11 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
     }
 
+    public void refreshList(){
+			recyclerView.setAdapter(null);
+			mainPresenter.onActivityCreate();
+	}
+
 		@Override
 		protected void onDestroy() {
 			super.onDestroy();
@@ -56,8 +65,6 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
 		@Override
 		public void setMainList(List<DataModel> list) {
-
-			  RecyclerView recyclerView = findViewById(R.id.mainList);
 
 			  CardAdapter adapter = new CardAdapter(new CardPresenter(list));
 				recyclerView.setAdapter(adapter);
