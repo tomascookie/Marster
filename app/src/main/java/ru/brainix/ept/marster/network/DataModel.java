@@ -17,7 +17,6 @@ public class DataModel {
     }
 
 
-
     public int getImageId() {
         return imageId;
     }

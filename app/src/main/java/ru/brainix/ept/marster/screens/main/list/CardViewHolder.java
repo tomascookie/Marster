@@ -1,6 +1,5 @@
 package ru.brainix.ept.marster.screens.main.list;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;

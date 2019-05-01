@@ -7,7 +7,6 @@ public class CheckNetwork{
 
     private final String LOG_TAG = "CheckNet ";
 
-
     //Чекаем соедение
     public boolean isInternet() {
 

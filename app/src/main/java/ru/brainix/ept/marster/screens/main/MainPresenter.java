@@ -43,9 +43,6 @@ public class MainPresenter implements IMainPresenter {
 
 
 
-
-
-
     }
 
 		@Override
@@ -61,21 +58,6 @@ public class MainPresenter implements IMainPresenter {
 			mainView = null;
 
 		}
-
-
-	/*	//Получаем сформированный список
-		private List<DataModel> getList(){
-
-			if(mainModel==null){
-
-				mainModel = new MainModel();
-
-			}
-
-			return mainModel.getMainList();
-
-		}
-*/
 
 
 

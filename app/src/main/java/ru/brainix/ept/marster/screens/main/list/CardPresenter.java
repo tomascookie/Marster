@@ -2,7 +2,6 @@ package ru.brainix.ept.marster.screens.main.list;
 
 import java.util.List;
 import ru.brainix.ept.marster.network.DataModel;
-import ru.brainix.ept.marster.screens.main.MainModel;
 
 public class CardPresenter {
 
@@ -27,12 +26,6 @@ public class CardPresenter {
 
 	public int getRepositoriesRowsCount() {
 		return repositories.size();
-	}
-
-	public int itemClick(){
-		MainModel model = new MainModel();
-
-		return model.getImgId(repo.getImageId());
 	}
 
 

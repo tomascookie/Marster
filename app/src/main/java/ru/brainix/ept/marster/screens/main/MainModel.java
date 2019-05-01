@@ -1,12 +1,10 @@
 package ru.brainix.ept.marster.screens.main;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import java.util.List;
 
-import java.util.concurrent.ExecutionException;
 import ru.brainix.ept.marster.App;
 import ru.brainix.ept.marster.network.DataModel;
 import ru.brainix.ept.marster.database.ImageDbAdapter;

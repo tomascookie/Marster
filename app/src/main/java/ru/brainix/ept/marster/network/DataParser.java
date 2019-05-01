@@ -61,9 +61,6 @@ public class DataParser {
 
 
 
-
-
-
     //Получаем данные, парсим, формируем лист
      private  List<DataModel> parser(){
 
@@ -118,9 +115,6 @@ public class DataParser {
 
 
 
-
-
-		//TODO:Может отдельный поток
 		private byte[] downloadImage(String imageUrl){
 
      	ImageDownloader imageDownloader = new ImageDownloader();
